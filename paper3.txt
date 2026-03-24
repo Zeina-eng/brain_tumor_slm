@@ -1,0 +1,365 @@
+AReviewofRecent Advances in Brain Tumor Diagnosis Based
+on AI-Based Classification
+RehamKaifi1,2,3
+Citation: Kaifi, R. A Review of
+Recent Advances in Brain Tumor
+Diagnosis Based on AI-Based
+Classification. Diagnostics 2023, 13,
+3007. https://doi.org/10.3390/
+diagnostics13183007
+Academic Editors: Dechang Chen,
+WanAzani Mustafa and
+HiamAlquran
+Received: 23 June 2023
+Revised: 14 September 2023
+Accepted: 19 September 2023
+Published: 20 September 2023
+Copyright: © 2023 by the author.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+1
+2
+3
+Department of Radiological Sciences, College of Applied Medical Sciences, King Saud bin Abdulaziz
+University for Health Sciences, Jeddah City 22384, Saudi Arabia; kaifir@ksau-hs.edu.sa
+King Abdullah International Medical Research Center, Jeddah City 22384, Saudi Arabia
+Medical Imaging Department, Ministry of the National Guard—Health Affairs,
+Jeddah City 11426, Saudi Arabia
+Abstract: Uncontrolled andfast cell proliferation is the cause of brain tumors. Early cancer detection is
+vitally important to save many lives. Brain tumors can be divided into several categories depending
+on the kind, place of origin, pace of development, and stage of progression; as a result, tumor
+classification is crucial for targeted therapy. Brain tumor segmentation aims to delineate accurately
+the areas of brain tumors. A specialist with a thorough understanding of brain illnesses is needed
+to manually identify the proper type of brain tumor. Additionally, processing many images takes
+time and is tiresome. Therefore, automatic segmentation and classification techniques are required to
+speed up and enhance the diagnosis of brain tumors. Tumors can be quickly and safely detected by
+brain scans using imaging modalities, including computed tomography (CT), magnetic resonance
+imaging (MRI), and others. Machine learning (ML) and artificial intelligence (AI) have shown
+promise in developing algorithms that aid in automatic classification and segmentation utilizing
+various imaging modalities. The right segmentation method must be used to precisely classify
+patients with brain tumors to enhance diagnosis and treatment. This review describes multiple
+types of brain tumors, publicly accessible datasets, enhancement methods, segmentation, feature
+extraction, classification, machine learning techniques, deep learning, and learning through a transfer
+to study brain tumors. In this study, we attempted to synthesize brain cancer imaging modalities
+with automatically computer-assisted methodologies for brain cancer characterization in ML and DL
+frameworks. Finding the current problems with the engineering methodologies currently in use and
+predicting a future paradigm are other goals of this article.
+Keywords: brain tumors; magnetic resonance imaging; computed tomography; computer-aided
+diagnostic and detection; deep learning; machine learning
+1. Introduction
+The human brain, which serves as the control center for all the body’s organs, is a
+highly developed organ that enables a person to adapt to and withstand various environ
+mental situations [1]. The human brain allows people to express themselves in words,
+carry out activities, and express thoughts and feelings. Cerebrospinal fluid (CSF), white
+matter (WM), and gray matter (GM) are the three major tissue components of the human
+brain. The gray matter regulates brain activity and comprises neurons and glial cells. The
+cerebral cortex is connected to other brain areas through white matter fibers comprising
+several myelinated axons. The corpus callosum, a substantial band of white matter fibers,
+connects the left and right hemispheres of the brain [2]. A brain tumor is a brain cell growth
+that is out of control and aberrant. Any unanticipated development may affect human
+functioning since the human skull is a rigid and volume-restricted structure, depending
+on the area of the brain involved. Additionally, it might spread to other organs, further
+jeopardizing human functions [3]. Early cancer detection makes the ability to plan effective
+treatment possible, which is crucial for the healthcare sector [4]. Cancer is difficult to cure,
+Diagnostics 2023, 13, 3007. https://doi.org/10.3390/diagnostics13183007
+https://www.mdpi.com/journal/diagnostics
+Diagnostics 2023, 13, 3007
+2 of 32
+and the odds of survival are significantly reduced if it spreads to nearby cells. Undoubtedly,
+manylives could be preserved if cancer was detected at its earliest stage using quick and
+affordable diagnostic methods. Both invasive and noninvasive approaches may be utilized
+to diagnose brain cancer. An incision is made during a biopsy to extract a lesion sample for
+analysis. It is regarded as the gold standard for the diagnosis of cancer, where pathologists
+examine several cell characteristics of the tumor specimen under a microscope to verify
+the malignancy.
+Noninvasive techniques include physical inspections of the body and imaging modal
+ities employed for imaging the brain [5]. In comparison to brain biopsy, other imaging
+modalities, such as CT scans and MRI images, are more rapid and secure. Radiologists
+use these imaging techniques to identify brain problems, evaluate the development of
+diseases, and plan surgeries [6]. However, brain scans or image interpretation to diagnose
+illnesses are prone to inter-reader variability and accuracy, which depends on the medical
+practitioner’s competency [5]. It is crucial to accurately identify the type of brain disorder
+to reduce diagnostic errors. Utilizing computer-aided diagnostic (CAD) technologies can
+improve accuracy. The fundamental idea behind CAD is to offer a computer result as an
+additional guide to help radiologists interpret images and shorten the reading time for
+images. This enhances the accuracy and stability of radiological diagnosis [7]. Several
+CAT-based artificial intelligence techniques, such as machine learning (ML) and deep
+learning (DL), are described in this review for diagnosing tissues and segmenting tumors.
+The segmentation process is a crucial aspect of image processing. This approach includes a
+procedure for extracting the area that helps determine whether a region is infected. Using
+MRIimages to segment brain tumors presents various challenges, including image noise,
+low contrast, loss borders, shifting intensities inside tissues, and tissue-type variation.
+The most complex and crucial task in many medical image applications is detecting
+and segmenting brain tumors because it often requires much data and information. Tumors
+comeinavariety of shapes and sizes. Automatic or semiautomatic detection/segmentation,
+helped by AI, is currently crucial in medical diagnostics. The medical professionals must
+authenticate the boundaries and areas of the brain cancer and ascertain where precisely it
+rests and the exact impacted locations before therapies such as chemotherapy, radiation, or
+brain surgery. This review examines the output from various algorithms that are used in
+segmenting and detecting brain tumors.
+The review is structured as follows: Types of brain tumors are described in Section 2.
+The imaging modalities utilized in brain imaging are discussed in Section 3. The review
+algorithms used in the study are provided in Section 4. A review of the relevant state-of
+the-art is provided in Section 5. The review is discussed in Section 6. The work’s conclusion
+is presented in Section 7.
+2. Types of Brain Tumors
+The main three parts of the brain are the brain stem, cerebrum, and cerebellum [1].
+The cerebellum is the second-largest component of the brain and manages bodily motor
+activities, including balance, posture, walking, and general coordination of movements. It
+is positioned behind the brain and connected to the brain stem. Internal white matter, tiny
+but deeply positioned volumes of gray matter, and a very thin gray matter outer cortex
+can all be found in the cerebellum and cerebrum. The brainstem links to the spinal cord.
+It is situated at the brain’s base. Vital bodily processes, including motor, sensory, cardiac,
+repositories, and reflexes, are all under the control of the brainstem. Its three structural
+components are the medulla oblongata, pons, and midbrain [2]. A brain tumor is the
+medical term for an unexpected growth of brain cells [8]. According to the tumor’s location,
+the kind of tissue involved, and whether they are malignant or benign, scientists have
+categorized several types of brain tumors based on the location of the origin (primary
+or secondary) and additional contributing elements [9]. The World Health Organization
+(WHO)categorized brain tumors into 120 kinds. This categorization is based on the cell’s
+origin and behavior, ranging from less aggressive to greater aggressive. Even certain tumor
+Diagnostics 2023, 13, 3007
+3 of 32
+forms are rated, with grades I being the least malignant (e.g., meningiomas, pituitary
+tumors) and IV being the most malignant. Despite differences in grading systems that rely
+on the kind of tumor, this denotes the pace of growth [10]. The most frequent type of brain
+tumor in adults is glioma, which may be classified into HGG and LGG. The WHO further
+categorized LGG into I–II grade tumors and HGG into III–IV grade. To reduce diagnosing
+errors, accurate identification of the specific type of brain disorder is crucial for treatment
+planning. A summary of various types of brain tumors is provided in Table 1.
+Table 1. Types of brain tumors.
+Types of Tumors Based on
+Type
+Comment
+Benign
+Less aggressive and grows slowly
+Nature
+Malignant
+Life-threatening and rapidly
+expanding
+Primary tumor
+Originates in the brain directly
+Origin
+Secondary tumor
+This tumor develops in another
+area of the body like lung and
+breast before migrating to the brain
+Grade I
+Basically, regular in shape, and they
+develop slowly
+Grading
+Grade II
+Appear strange to the view and
+grow more slowly
+Grade III
+These tumors grow more quickly
+than grade II cancers
+Grade IV
+Reproduced with greater rate
+Stage 0
+Malignant but do not invade
+neighboring cells
+Stage 1
+Progression stage
+Stage 2
+Stage 3
+Stage 4
+Malignant and quickly spreading
+The malignancy invades every part
+of the body
+3. Imaging Modalities
+For many years, the detection of brain abnormalities has involved the use of several
+medical imaging methods. The two brain imaging approaches are structural and functional
+scanning [11]. Different measurements relating to brain anatomy, tumor location, traumas,
+and other brain illnesses compose structural imaging [12]. The finer-scale metabolic alter
+ations, lesions, and visualization of brain activity are all picked up by functional imaging
+methods. Techniques including CT, MRI, SPECT, positron emission tomography (PET),
+(FMRI), and ultrasound (US) are utilized to localize brain tumors for their size, location as
+well as shape, and other characteristics [13].
+3.1. MRI
+MRIis anoninvasive procedure that utilizes nonionizing, safe radiation [14] to display
+the 3D anatomical structure of any region of the body without the need for cutting the
+tissue. To acquire images, it employs RF pulses and an intense magnetic field [15].
+The body is intended to be positioned within an intense magnetic field. The water
+molecules of the human body are initially in their equilibrium state when the magnets
+are off. The magnetic field is then activated by moving the magnets. The body’s water
+molecules align with the magnetic field’s direction under the effect of this powerful mag
+netic field [14]. Protons are stimulated to spin opposing the magnetic field and realiIn addition to the segmentation of the brain cancer region from the MRI scan, the
+classification of the tumor into its appropriate type is crucial for diagnosis and treatment
+planning, which in today’s medical practice necessitates a biopsy process. Several ap
+proaches that use shallow ML and DL have been put forth for classifying brain tumors.
+Type shallow ML techniques frequently include preprocessing, ROI identification, and
+feature extraction steps. Extracting descriptive information is a difficult task because of the
+inherent noise sensitivity associated with MRI image collection as well as differences in the
+shape, size, and position of tumor tissue cells. As a result, deep learning algorithms are
+currently the most advanced method for classifying many types of brain cancers, includ
+ing astrocytomas, gliomas, meningiomas, and pituitary tumors. This review has covered
+several classifications of brain tumors.
+The noisy nature of an MRI image is one of the most frequent difficulties in ML
+based segmentation and classification of brain tumors. To increase the precision of brain
+tumor segmentation and classification models, noise estimation and denoising MRI images
+is a vital preprocessing operation. As a result, several methods, including the median
+f
+ilter [115], Wiener filter and DWT [30], and DL-based methods [117], have been suggested
+for denoising MRI images.
+Large amounts of data are needed for DL models to operate effectively, but there need
+to be more datasets available. Data augmentation aids in expanding small datasets and
+creating a powerful generalized model. A common augmentation method for MRI images
+has yet to be developed. Although many methods have been presented by researchers,
+their primary goal is to increase the number of images. Most of the time, they ignore the
+connections between space and texture. An identical augmentation technique is required
+for comparative analysis to be conducted on its foundation.
+7. General Problems and Challenges
+Features are first manually extracted for ML, and are then fed into the ML-based
+differentiation system. Continuous variation within image classes makes utilizing ML
+based algorithms for image classification challenging. Furthermore, the feature extraction
+methods’ usage of modern distance metrics makes it impossible to determine the similarity
+between two images.
+Deep learning analyzes several parameters and optimizes them to extract and select
+features on its own. However, the system lacks intelligence in feature selection and typi
+cally pools, which reduces parameters and eliminates features that could be useful to the
+entire system.
+Furthermore, DL models need data, and those data are coupled with millions or tril
+lions of parameters. Therefore, enormous amounts of memory and GPU-based computers
+are required in the current environment. However, because of their high cost, these devices
+are not available to everyone. Consequently, many researchers need to create models that
+f
+it within their available budgets, which significantly impacts the quality of their study.
+The noisy nature of an MRI image is one of the most frequent difficulties in ML-based
+brain tumor detection and classification. Preprocessing is necessary to remove all forms of
+noise from data and make it more suitable for the task at hand. Preprocessing difficulties
+exist in all the available datasets. However, the BRATS datasets have problems, such
+as motion artifacts and noise. There is no established preprocessing standard currently.
+People employ subpar application software, causing the image quality to decrease rather
+than improve.
+7.1. Brain Cancer and Other Brain Disorders
+7.1.1. Stroke
+Hemorrhagic strokes come from blood vessel injury or aberrant vascular structure,
+while ischemic strokes occur when the brain’s blood supply is cut off. Although the fact
+that strokes and brain tumors are two distinct illnesses, the connections associated with
+them have been studied [127].
+Diagnostics 2023, 13, 3007
+27 of 32
+They discovered that stroke patients are more likely than other cancer types to acquire
+brain cancer. Another intriguing conclusion of the study is that women between the ages
+of 40 and 60 and elderly stroke patients are more likely to acquire brain cancer.
+7.1.2. Alzheimer’s Disease
+Short-term loss of memoryisaninitialsymptomofAlzheimer’sdisease(AD),achronic
+neurodegenerative illness that may become worse over time as the disease progresses [108].
+Despite AD andcancer being two distinct diseases, several studies have found a connection
+between them. According to the research, there is an inverse association between cancer
+and Alzheimer’s disease. They discovered that patients who had cancer had a 33% lower
+risk of Alzheimer’s disease than individuals who had not had cancer throughout the course
+of a mean follow-up of 10 years. Another intriguing finding of the study was that people
+with ADhada61%lowerrisk of developing cancer.
+8. Future Directions
+The mainapplications of CADx systems are in educating and training; clinical practice
+is not one of them. CADx-based systems still need to be widely used in clinics. The
+absence of established techniques for assessing CADx systems in a practical environment
+is one cause of this. The performance metrics outlined in this study provide a helpful and
+necessary baseline for comparing algorithms, but because they are all so dependent on the
+training set, more advanced tools are required.
+The fact that the image formats utilized to train the models were those characteristics
+of the AI research field (PNG) rather than those of the radiology field (DICOM, NIfTI) is
+noteworthy. Many of the articles analyzed needed authors with clinical backgrounds.
+A different but related technical issue that may affect the performance of CADx
+systems in practice is the need for physician training on interacting with and interpreting
+the results of such systems for diagnostic decisions. This issue must be dealt with in all the
+papers included in the review. In terms of research project relevance and the acceptance of
+its findings, greater participation by doctors in the process may be advantageous.
+9. Conclusions
+Abrain tumor is an abnormal growth of brain tissue that affects the brain’s ability
+to function normally. The primary objective in medical image processing is to find ac
+curate and helpful information with the minimum possible errors by using algorithms.
+The four steps involved in segmenting and categorizing brain tumors using MRI data are
+preprocessing, picture segmentation, extracting features, and image classification. The
+diagnosis, treatment strategy, and patient follow-up can all be greatly enhanced by au
+tomating the segmentation and categorization of brain tumors. It is still difficult to create
+a fully autonomous system that can be deployed on clinical floors due to the appearance
+of the tumor and its irregular size, form, and nature. The review’s primary goal is to
+present the state-of-the-art in the field of brain cancer, which includes the pathophysiology
+of the disease, imaging technologies, WHO classification standards for tumors, primary
+methods of diagnosis, and CAD algorithms for brain tumor classifications using ML and
+DLtechniques. Automating the segmentation and categorization of brain tumors using
+deep learning techniques has many advantages over region-growing and shallow ML
+systems. DL algorithms’ powerful feature learning capabilities are primarily to blame for
+this. Although DL techniques have made a substantial contribution, a general technique
+is still needed. This study reviewed 53 studies that used ML and DL to classify brain
+tumors based on MRI, and it examined the challenges and obstacles that CAD brain tumor
+classification techniques now face in practical application and advancement—a thorough
+examination of the variables that might impact classification accuracy. The MRI sequences
+and webaddress of the online repository for the dataset are among the publicly available
+databases that have been briefly listed in Table 4 and used in the experiments evaluated in
+this paper.
+Diagnostics 2023, 13, 3007
+28 of 32
+Funding: This research received no external funding.
+Institutional Review Board Statement: Not applicable.
+Conflicts of Interest: The author declares no conflict of interest.
+References
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+Watson, C.; Kirkcaldie, M.; Paxinos, G. The Brain: An Introduction to Functional Neuroanatomy. 2010. Available online:
+http://ci.nii.ac.jp/ncid/BB04049625 (accessed on 22 May 2023).
+Jellinger, K.A. The Human Nervous System Structure and Function, 6th edn. Eur. J. Neurol. 2009, 16, e136. [CrossRef]
+DeAngelis, L.M. Brain tumors. N. Engl. J. Med. 2001, 344, 114–123. [CrossRef]
+Louis, D.N.; Perry, A.; Wesseling, P.; Brat, D.J.; Cree, I.A.; Figarella-Branger, D.; Hawkins, C.; Ng, H.K.; Pfister, S.M.; Reifenberger,
+G.; et al. The 2021 WHOClassification of Tumors of the Central Nervous System: A summary. Neuro-Oncology 2021, 23, 1231–1251.
+[CrossRef]
+Hayward, R.M.; Patronas, N.; Baker, E.H.; Vézina, G.; Albert, P.S.; Warren, K.E. Inter-observer variability in the measurement of
+diffuse intrinsic pontine gliomas. J. Neuro-Oncol. 2008, 90, 57–61. [CrossRef]
+Mahaley, M.S., Jr.; Mettlin, C.; Natarajan, N.; Laws, E.R., Jr.; Peace, B.B. National survey of patterns of care for brain-tumor
+patients. J. Neurosurg. 1989, 71, 826–836. [CrossRef] [PubMed]
+Sultan, H.H.; Salem, N.M.; Al-Atabany, W. Multi-Classification of Brain Tumor Images Using Deep Neural Network. IEEE Access
+2019, 7, 69215–69225. [CrossRef]
+Johnson, D.R.; Guerin, J.B.; Giannini, C.; Morris, J.M.; Eckel, L.J.; Kaufmann, T.J. 2016 Updates to the WHO Brain Tumor
+Classification System: What the Radiologist Needs to Know. RadioGraphics 2017, 37, 2164–2180. [CrossRef] [PubMed]
+Buckner, J.C.; Brown, P.D.; O’Neill, B.P.; Meyer, F.B.; Wetmore, C.J.; Uhm, J.H. Central Nervous System Tumors. Mayo Clin. Proc.
+2007, 82, 1271–1286. [CrossRef] [PubMed]
+10. World Health Organization: WHO, “Cancer”. July 2019. Available online: https://www.who.int/health-topics/cancer
+(accessed on 30 March 2022).
+11. Amyot,F.; Arciniegas, D.B.; Brazaitis, M.P.; Curley, K.C.; Diaz-Arrastia, R.; Gandjbakhche, A.; Herscovitch, P.; Hinds, S.R.; Manley,
+G.T.; Pacifico, A.; et al. A Review of the Effectiveness of Neuroimaging Modalities for the Detection of Traumatic Brain Injury. J.
+Neurotrauma 2015, 32, 1693–1721. [CrossRef]
+12. Pope, W.B. Brain metastases: Neuroimaging. Handb. Clin. Neurol. 2018, 149, 89–112. [CrossRef]
+13. Abd-Ellah, M.K.; Awad, A.I.; Khalaf, A.A.; Hamed, H.F. A review on brain tumor diagnosis from MRI images: Practical
+implications, key achievements, and lessons learned. Magn. Reson. Imaging 2019, 61, 300–318. [CrossRef] [PubMed]
+14. Ammari, S.; Pitre-Champagnat, S.; Dercle, L.; Chouzenoux, E.; Moalla, S.; Reuze, S.; Talbot, H.; Mokoyoko, T.; Hadchiti, J.;
+Diffetocq, S.; et al. Influence of Magnetic Field Strength on Magnetic Resonance Imaging Radiomics Features in Brain Imaging, an
+In Vitro and In Vivo Study. Front. Oncol. 2021, 10, 541663. [CrossRef] [PubMed]
+15. Sahoo, L.; Sarangi, L.; Dash, B.R.; Palo, H.K. Detection and Classification of Brain Tumor Using Magnetic Resonance Images.
+In Advances in Electrical Control and Signal Systems: Select Proceedings of AECSS, Bhubaneswar, India, 8–9 November 2019; Springer:
+Singapore, 2020; Volume 665, pp. 429–441. [CrossRef]
+16. Kaur, R.; Doegar, A. Localization and Classification of Brain Tumor using Machine Learning & Deep Learning Techniques. Int. J.
+Innov. Technol. Explor. Eng. 2019, 8, 59–66.
+17. The Radiology Assistant: Multiple Sclerosis 2.0. 1 December 2021. Available online: https://radiologyassistant.nl/
+neuroradiology/multiple-sclerosis/diagnosis-and-differential-diagnosis-3#mri-protocol-ms-brain-protocol
+(accessed on 22 May 2023).
+18. Savoy, R.L. Functional magnetic resonance imaging (fMRI). In Encyclopedia of Neuroscience; Elsevier: Charlestown, MA, USA, 1999.
+19. Luo,Q.; Li, Y.; Luo, L.; Diao, W. Comparisons of the accuracy of radiation diagnostic modalities in brain tumor. Medicine 2018,
+97, e11256. [CrossRef]
+20. Positron Emission Tomography (PET). Johns Hopkins Medicine. 20 August 2021. Available online: https://www.
+hopkinsmedicine.org/health/treatment-tests-and-therapies/positron-emission-tomography-pet (accessed on 20 May 2023).
+21. Mayfield Brain and Spine. SPECT Scan. 2022. Available online: https://mayfieldclinic.com/pe-spect.htm (accessed on
+22 May2023).
+22. Sastry, R.; Bi, W.L.; Pieper, S.; Frisken, S.; Kapur, T.; Wells, W.; Golby, A.J. Applications of Ultrasound in the Resection of Brain
+Tumors. J. Neuroimaging 2016, 27, 5–15. [CrossRef]
+23. Nasrabadi, N.M. Pattern recognition and machine learning. J. Electron. Imaging 2007, 16, 49901.
+24. Erickson, B.J.; Korfiatis, P.; Akkus, Z.; Kline, T.L. Machine learning for medical imaging. Radiographics 2017, 37, 505–515. [CrossRef]
+25. Mohan, M.R.M.; Sulochana, C.H.; Latha, T. Medical image denoising using multistage directional median filter. In Proceed
+ings of the 2015 International Conference on Circuits, Power and Computing Technologies [ICCPCT-2015], Nagercoil, India,
+9–20 March 2015.
+26. Borole, V.Y.; Nimbhore, S.S.; Kawthekar, S.S. Image processing techniques for brain tumor detection: A review. Int. J. Emerg.
+Trends Technol. Comput. Sci. (IJETTCS) 2015, 4, 2
