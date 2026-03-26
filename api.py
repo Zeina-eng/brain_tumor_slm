@@ -12,7 +12,7 @@ def home():
 @app.post("/upload/")
 async def upload_file(file: UploadFile = File(...)):
     try:
-        API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-small"
+        API_URL = "https://router.huggingface.co/hf-inference/models/google/flan-t5-small"
         HEADERS = {"Authorization": "Bearer YOUR_HF_TOKEN"}
 
         content = await file.read()
