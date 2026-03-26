@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, File
 import requests
-import docx
+from docx import Document
+import io
 
 app = FastAPI()
 
@@ -14,13 +15,14 @@ async def upload_file(file: UploadFile = File(...)):
         API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-small"
         HEADERS = {"Authorization": "Bearer YOUR_HF_TOKEN"}
 
+        content = await file.read()
+
         # Handle file types
         if file.filename.endswith(".txt"):
-            content = await file.read()
             text = content.decode("utf-8")
 
         elif file.filename.endswith(".docx"):
-            doc = docx.Document(file.file)
+            doc = Document(io.BytesIO(content))
             text = "\n".join([para.text for para in doc.paragraphs])
 
         else:
