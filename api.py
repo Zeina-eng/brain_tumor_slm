@@ -2,6 +2,7 @@ from fastapi import FastAPI, UploadFile, File
 import requests
 from docx import Document
 import io
+import os
 
 app = FastAPI()
 
@@ -13,7 +14,9 @@ def home():
 async def upload_file(file: UploadFile = File(...)):
     try:
         API_URL = "https://router.huggingface.co/hf-inference/models/google/flan-t5-small"
-        HEADERS = {"Authorization": "Bearer YOUR_HF_TOKEN"}
+
+        HF_TOKEN = os.getenv("HF_TOKEN")
+        HEADERS = {"Authorization": f"Bearer {HF_TOKEN}"}
 
         content = await file.read()
 
