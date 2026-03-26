@@ -3,15 +3,15 @@ import requests
 
 app = FastAPI()
 
-API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-small"
-HEADERS = {"Authorization": "Bearer YOUR_HF_TOKEN"}
-
 @app.get("/")
 def home():
     return {"message": "AI Paper Summarizer"}
 
 @app.post("/upload/")
 async def upload_file(file: UploadFile = File(...)):
+    API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-small"
+    HEADERS = {"Authorization": "Bearer YOUR_HF_TOKEN"}
+
     content = await file.read()
     text = content.decode("utf-8")
 
